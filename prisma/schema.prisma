@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int     @id @default(autoincrement())
+  email     String  @db.VarChar(255) @unique 
+  password  String  @db.VarChar(255)
+}
+
+model InspirationCategory {
+  id                  Int                 @id @default(autoincrement())
+  category_name       String              @db.VarChar(100)
+  inspirationImages   InspirationImage[]
+}
+
+model InspirationImage {
+  id                        Int                  @id @default(autoincrement())
+  URL                       String               @db.VarChar(255)
+  inspirationCategory       InspirationCategory  @relation(fields: [inspirationCategoryId], references: [id])
+  inspirationCategoryId     Int                  
+}
+
+model RealisationCategory {
+  id                    Int                   @id @default(autoincrement())
+  photo_category_name   String                @db.VarChar(100)              @unique
+  realisationArticles   RealisationArticle[]
+}
+
+model RealisationArticle {
+  id                      Int                   @id @default(autoincrement())
+  URL                     String                @db.VarChar(255)
+  title                   String                @db.VarChar(55)
+  paragraph               String                @db.VarChar(455)
+  realisationCategory     RealisationCategory   @relation(fields: [realisationCategoryId], references: [id])
+  realisationCategoryId   Int                   
+}

@@ -1,0 +1,36 @@
+POST /api/admin HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+Content-Length: 64
+
+{
+  "email": "lololasticot@gmail.com",
+  "password": "lolo"
+}
+
+###
+
+GET http://localhost:8000/api/admin
+
+###
+
+DELETE http://localhost:8000/api/admin/3
+
+###
+
+PUT http://localhost:8000/api/admin/1 HTTP/1.1
+Host: localhost:8000
+Content-Type: application/json
+Content-Length: 38
+
+{
+    "email": "rutabaga@gmail.com"
+}
+
+###
+
+GET http://localhost:8000/api/realisation
+
+###
+
+DELETE http://localhost:8000/api/realisation/1

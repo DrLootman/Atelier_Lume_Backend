@@ -33,15 +33,16 @@ export interface RealisationCategoryWithArticlesI extends RealisationCategoryI {
   realisationArticles: RealisationArticleI[];
 }
 
+// Interfaces linked to the inspiration schema
 export interface InspirationCategoryI {
   id: number;
   category_name: string;
-  inspirationImage: InspirationImage[];
+  inspirationImage: InspirationImageI[];
 }
 
-export interface InspirationImage {
+export interface InspirationImageI {
   id: number;
   URL: string;
-  inspirationCategory: InspirationCategoryI;
+  label: string;
   inspirationCategoryId: number;
 }

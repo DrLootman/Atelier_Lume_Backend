@@ -28,10 +28,12 @@ app.get('/', (req: Request, res: Response) => {
 import adminRoutes from "./src/routes/admin.route";
 import realisationCategoryRoutes from "./src/routes/realisationCategory.route";
 import realisationArticleRoutes from "./src/routes/realisationArticle.route";
+import inspirationImageRoutes from "./src/routes/inspirationImage.route";
 
 app.use("/api/admin", adminRoutes);
 app.use("/api/realisation", realisationCategoryRoutes);
 app.use("/api/articles", realisationArticleRoutes);
+app.use("/api/inspiration", inspirationImageRoutes);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);

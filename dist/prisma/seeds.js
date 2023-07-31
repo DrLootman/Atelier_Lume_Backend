@@ -11,6 +11,34 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
+const inspirationCategory = [
+    {
+        id: 1,
+        category_name: "Design d'intérieur"
+    }
+];
+const inspirationImages = [
+    {
+        id: 1,
+        URL: "/inspirations/Modelisation_3D_1.jpg",
+        label: "Design d'intérieur"
+    },
+    {
+        id: 2,
+        URL: "/inspirations/Modelisation_3D_4.jpg",
+        label: "Inspiration scandinave"
+    },
+    {
+        id: 3,
+        URL: "/inspirations/Modelisation_3D_5.jpg",
+        label: "Inspiration slovaque"
+    },
+    {
+        id: 4,
+        URL: "/inspirations/Modelisation_3D_8.jpg",
+        label: "Idée novatrice"
+    }
+];
 const realisationArticles = [
     {
         id: 1,
@@ -47,16 +75,30 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             console.log("Début de la création des catégories de réalisations...");
-            //Création de ma catégorie
+            //Création de ma catégorie d'articles
             yield prisma.realisationCategory.create({
                 data: {
                     id: 1,
                     photo_category_name: "Mes projets récents",
                 }
             });
+            //Création de mes articles associés à la seule catégorie créée
             yield realisationArticles.map((el) => __awaiter(this, void 0, void 0, function* () {
                 yield prisma.realisationArticle.create({
                     data: Object.assign(Object.assign({}, el), { realisationCategoryId: 1 }),
+                });
+            }));
+            // Création de ma catégorie d'inspirations (prévues pour les carousels):
+            yield prisma.inspirationCategory.create({
+                data: {
+                    id: 1,
+                    category_name: "Design d'intérieur",
+                }
+            });
+            //Création de mes images associés à la seule catégorie d'inspiration créée
+            yield inspirationImages.map((el) => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.inspirationImage.create({
+                    data: Object.assign(Object.assign({}, el), { inspirationCategoryId: 1 }),
                 });
             }));
             console.log("Les opérations de création sont terminées");

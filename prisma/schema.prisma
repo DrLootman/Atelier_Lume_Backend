@@ -25,6 +25,7 @@ model InspirationCategory {
 model InspirationImage {
   id                        Int                  @id @default(autoincrement())
   URL                       String               @db.VarChar(255)
+  label                     String               @db.VarChar(55)
   inspirationCategory       InspirationCategory  @relation(fields: [inspirationCategoryId], references: [id])
   inspirationCategoryId     Int                  
 }

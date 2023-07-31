@@ -4,6 +4,36 @@ import { RealisationArticleI } from "../src/interfaces/interfaces";
 
 const prisma = new PrismaClient();
 
+const inspirationCategory = [
+  {
+    id: 1,
+    category_name: "Design d'intérieur"
+  }
+]
+
+const inspirationImages = [
+  {
+    id: 1,
+    URL: "/inspirations/Modelisation_3D_1.jpg",
+    label: "Design d'intérieur"
+  },
+  {
+    id: 2,
+    URL: "/inspirations/Modelisation_3D_4.jpg",
+    label: "Inspiration scandinave"
+  },
+  {
+    id: 3,
+    URL: "/inspirations/Modelisation_3D_5.jpg",
+    label: "Inspiration slovaque"
+  },
+  {
+    id: 4,
+    URL: "/inspirations/Modelisation_3D_8.jpg",
+    label: "Idée novatrice"
+  }
+]
+
 const realisationArticles = [
   {
     id: 1,
@@ -41,7 +71,7 @@ async function main() {
   try {
     console.log("Début de la création des catégories de réalisations...");
 
-    //Création de ma catégorie
+    //Création de ma catégorie d'articles
     await prisma.realisationCategory.create({
       data: {
         id: 1,
@@ -49,12 +79,30 @@ async function main() {
       }
     })
 
-
+    //Création de mes articles associés à la seule catégorie créée
     await realisationArticles.map(async (el) => {
       await prisma.realisationArticle.create({
         data: {
           ...el,
           realisationCategoryId: 1
+        },
+      });
+    });
+
+    // Création de ma catégorie d'inspirations (prévues pour les carousels):
+    await prisma.inspirationCategory.create({
+      data: {
+        id: 1,
+        category_name: "Design d'intérieur",
+      }
+    })
+
+    //Création de mes images associés à la seule catégorie d'inspiration créée
+    await inspirationImages.map(async (el) => {
+      await prisma.inspirationImage.create({
+        data: {
+          ...el,
+          inspirationCategoryId: 1
         },
       });
     });

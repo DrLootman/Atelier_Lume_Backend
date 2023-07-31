@@ -26,7 +26,7 @@ const hashingOptions = {
 };
 const hashedPassword = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const hash = yield argon2_1.default.hash(req.body.password);
+        const hash = yield argon2_1.default.hash(req.body.password, hashingOptions);
         req.body.password = hash;
         next();
     }

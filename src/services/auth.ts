@@ -21,7 +21,7 @@ export const hashedPassword = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const hash = await argon2.hash(req.body.password);
+    const hash = await argon2.hash(req.body.password, hashingOptions);
 
     req.body.password = hash;
 

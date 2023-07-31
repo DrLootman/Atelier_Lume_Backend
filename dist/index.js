@@ -24,9 +24,11 @@ app.get('/', (req, res) => {
 const admin_route_1 = __importDefault(require("./src/routes/admin.route"));
 const realisationCategory_route_1 = __importDefault(require("./src/routes/realisationCategory.route"));
 const realisationArticle_route_1 = __importDefault(require("./src/routes/realisationArticle.route"));
+const inspirationImage_route_1 = __importDefault(require("./src/routes/inspirationImage.route"));
 app.use("/api/admin", admin_route_1.default);
 app.use("/api/realisation", realisationCategory_route_1.default);
 app.use("/api/articles", realisationArticle_route_1.default);
+app.use("/api/inspiration", inspirationImage_route_1.default);
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });

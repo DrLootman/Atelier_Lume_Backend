@@ -46,3 +46,18 @@ export interface InspirationImageI {
   label: string;
   inspirationCategoryId: number;
 }
+
+// Interfaces linked to the nodeMailer middleware:
+export interface MailOptionsI {
+  from: string;
+  to: string;
+  priority: "high" | undefined;
+  subject: string;
+  html: string;
+}
+
+export interface nodeMailerBodyI {
+  name: string,
+  email: string,
+  message: string
+}

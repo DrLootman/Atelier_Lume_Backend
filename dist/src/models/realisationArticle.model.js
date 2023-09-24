@@ -23,8 +23,8 @@ class RealisationModel {
         return __awaiter(this, void 0, void 0, function* () {
             const threeImages = yield this.client.realisationArticle.findMany({
                 take: 3,
-                orderBy: { id: 'asc' },
-                select: { URL: true },
+                // orderBy: { id: 'asc' },
+                select: { id: true, URL: true },
             });
             return threeImages;
         });

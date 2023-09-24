@@ -26,6 +26,7 @@ export interface RealisationArticleI {
 }
 
 export interface ArticleImagesI {
+  id: number;
   URL: string;
 }
 
@@ -47,6 +48,14 @@ export interface InspirationImageI {
   inspirationCategoryId: number;
 }
 
+// Interfaces linked to the Creation table:
+
+export interface CreationI {
+  id: number;
+  label: string;
+  photo_url: string;
+}
+
 // Interfaces linked to the nodeMailer middleware:
 export interface MailOptionsI {
   from: string;
@@ -57,7 +66,14 @@ export interface MailOptionsI {
 }
 
 export interface nodeMailerBodyI {
-  name: string,
-  email: string,
-  message: string
+  name: string;
+  email: string;
+  message: string;
 }
+
+export interface PersonnalInformationsI {
+  id?: number;
+  photo_url?: string;
+  profile_paragraph?: string;
+}
+

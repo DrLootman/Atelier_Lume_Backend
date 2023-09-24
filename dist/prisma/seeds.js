@@ -14,30 +14,30 @@ const prisma = new client_1.PrismaClient();
 const inspirationCategory = [
     {
         id: 1,
-        category_name: "Design d'intérieur"
-    }
+        category_name: "Design d'intérieur",
+    },
 ];
 const inspirationImages = [
     {
         id: 1,
         URL: "/inspirations/Modelisation_3D_1.jpg",
-        label: "Design d'intérieur"
+        label: "Design d'intérieur",
     },
     {
         id: 2,
         URL: "/inspirations/Modelisation_3D_4.jpg",
-        label: "Inspiration scandinave"
+        label: "Inspiration scandinave",
     },
     {
         id: 3,
         URL: "/inspirations/Modelisation_3D_5.jpg",
-        label: "Inspiration slovaque"
+        label: "Inspiration slovaque",
     },
     {
         id: 4,
         URL: "/inspirations/Modelisation_3D_8.jpg",
-        label: "Idée novatrice"
-    }
+        label: "Idée novatrice",
+    },
 ];
 const realisationArticles = [
     {
@@ -69,7 +69,24 @@ const realisationArticles = [
         URL: "/realisations/christmas.jpg",
         title: "Projet Noël",
         paragraph: "Décoration de la table de Noël de ma famille.",
-    }
+    },
+];
+const creation = [
+    {
+        id: 1,
+        photo_url: "/realisations/christmas.jpg",
+        label: "Charme hivernal",
+    },
+    {
+        id: 2,
+        photo_url: "/realisations/baptiste.jpg",
+        label: "Eveil lumineux",
+    },
+    {
+        id: 3,
+        photo_url: "/realisations/boheme.jpg",
+        label: "Traits d'Orient",
+    },
 ];
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -80,7 +97,14 @@ function main() {
                 data: {
                     id: 1,
                     photo_category_name: "Mes projets récents",
-                }
+                },
+            });
+            yield prisma.personnalInformations.create({
+                data: {
+                    id: 1,
+                    photo_url: "/uploads/Profile_Img.jpg",
+                    profile_paragraph: `Je suis Camille, une décoratrice d'intérieur passionnée par l'aménagement et la mise en scène des espaces de vie. J'ai récemment obtenu mon diplôme en architecture intérieure et j'ai depuis travaillé avec différents clients pour créer des designs intérieurs sur mesure qui répondent à leurs besoins et reflètent leur personnalité.`,
+                },
             });
             //Création de mes articles associés à la seule catégorie créée
             yield realisationArticles.map((el) => __awaiter(this, void 0, void 0, function* () {
@@ -93,12 +117,18 @@ function main() {
                 data: {
                     id: 1,
                     category_name: "Design d'intérieur",
-                }
+                },
             });
             //Création de mes images associés à la seule catégorie d'inspiration créée
             yield inspirationImages.map((el) => __awaiter(this, void 0, void 0, function* () {
                 yield prisma.inspirationImage.create({
                     data: Object.assign(Object.assign({}, el), { inspirationCategoryId: 1 }),
+                });
+            }));
+            // Création des trois images nécessaires pour le volet "Mes créations":
+            yield creation.map((el) => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.creation.create({
+                    data: Object.assign({}, el),
                 });
             }));
             console.log("Les opérations de création sont terminées");

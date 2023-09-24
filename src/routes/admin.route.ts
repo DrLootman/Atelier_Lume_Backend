@@ -7,7 +7,9 @@ import { hashedPassword, isEmailExist, isPasswordValid } from "../services/auth"
 
 router.post("/", hashedPassword, adminController.createAdmin);
 router.post("/login", isEmailExist, isPasswordValid);
+
 router.get("/", adminController.getAllAdmin);
+
 router.put("/:id", adminController.updateAdmin);
 router.delete("/:id", adminController.deleteAdmin);
 

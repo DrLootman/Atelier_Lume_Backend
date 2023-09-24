@@ -16,6 +16,12 @@ model Admin {
   password  String  @db.VarChar(255)
 }
 
+model PersonnalInformations {
+  id                  Int     @id @default(autoincrement())
+  photo_url           String  @db.VarChar(255)
+  profile_paragraph   String  @db.VarChar(355)
+}
+
 model InspirationCategory {
   id                  Int                 @id @default(autoincrement())
   category_name       String              @db.VarChar(100)
@@ -43,4 +49,10 @@ model RealisationArticle {
   paragraph               String                @db.VarChar(455)
   realisationCategory     RealisationCategory   @relation(fields: [realisationCategoryId], references: [id])
   realisationCategoryId   Int                   
+}
+
+model Creation {
+  id                      Int                   @id @default(autoincrement())
+  label                   String                @db.VarChar(55)
+  photo_url               String                @db.VarChar(255)
 }

@@ -16,7 +16,7 @@ const sendEmail = (req, res) => {
             .max(15)
             .required(),
         email: joi_1.default.string()
-            .email({ minDomainSegments: 2, tlds: { allow: ['com', 'gmail', 'hotmail'] } }),
+            .email({ minDomainSegments: 2, tlds: { allow: ['com', 'fr', 'gmail', 'hotmail'] } }),
         message: joi_1.default.string()
             .max(500)
             .required(),

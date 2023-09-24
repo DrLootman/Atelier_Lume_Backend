@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isPasswordValid = exports.isEmailExist = exports.hashedPassword = void 0;
+exports.verifyToken = exports.isPasswordValid = exports.isEmailExist = exports.hashedPassword = void 0;
 const argon2_1 = __importDefault(require("argon2"));
 const admin_model_1 = __importDefault(require("../models/admin.model"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -75,14 +75,14 @@ const isPasswordValid = (req, res) => __awaiter(void 0, void 0, void 0, function
                 const payload = res.locals.user;
                 if (process.env.JWT_SECRET) {
                     const secretKey = process.env.JWT_SECRET;
-                    const token = jsonwebtoken_1.default.sign({ payload }, secretKey);
+                    const token = jsonwebtoken_1.default.sign({ payload }, secretKey, { expiresIn: "1h" });
                     res.status(200).send({ token });
                 }
             }
             else {
                 res.status(500).send({
                     success: false,
-                    message: "Passwords doesn't match",
+                    message: "Passwords do not match",
                 });
             }
         }
@@ -95,3 +95,40 @@ const isPasswordValid = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.isPasswordValid = isPasswordValid;
+const verifyToken = (req, res, next) => {
+    try {
+        const authorizationHeader = req.get("Authorization");
+        if (!authorizationHeader) {
+            throw new Error("Authorization header is missing");
+        }
+        const [type, token] = authorizationHeader.split(" ");
+        if (type !== "Bearer") {
+            throw new Error("Authorization header has not the good type");
+        }
+        if (process.env.JWT_SECRET) {
+            const secretKey = process.env.JWT_SECRET;
+            const tokenVerification = jsonwebtoken_1.default.verify(token, secretKey);
+            console.log("Vérification du token", tokenVerification);
+            if (tokenVerification) {
+                next();
+            }
+            else {
+                res.status(403).json({
+                    success: false,
+                });
+            }
+        }
+        else {
+            res.status(400).send({
+                success: false,
+                message: "Unknown secret key"
+            });
+        }
+    }
+    catch (err) {
+        if (err.name === "TokenExpiredError") {
+            res.status(401).send({ message: "Token has expired" });
+        }
+    }
+};
+exports.verifyToken = verifyToken;

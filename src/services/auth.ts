@@ -82,14 +82,14 @@ export const isPasswordValid = async (req: Request, res: Response): Promise<void
         
         if (process.env.JWT_SECRET) {
           const secretKey: string = process.env.JWT_SECRET;
-          const token = jwt.sign({ payload }, secretKey);
+          const token = jwt.sign({ payload }, secretKey, { expiresIn: "1h" });
     
           res.status(200).send({ token });
         }
       } else {
         res.status(500).send({
           success: false,
-          message: "Passwords doesn't match",
+          message: "Passwords do not match",
         });
       }
     } catch (err: any) {
@@ -97,6 +97,51 @@ export const isPasswordValid = async (req: Request, res: Response): Promise<void
         success: false,
         message: "Internal Server Error",
       });
+    }
+  }
+}
+
+export const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
+  try {
+    const authorizationHeader = req.get("Authorization");
+
+
+
+    if (!authorizationHeader) {
+      throw new Error("Authorization header is missing")
+    }
+
+    const [type, token] = authorizationHeader.split(" ");
+
+    if (type !== "Bearer") {
+      throw new Error("Authorization header has not the good type")
+    }
+
+
+    if (process.env.JWT_SECRET) {
+      const secretKey: string = process.env.JWT_SECRET;
+      const tokenVerification = jwt.verify(token, secretKey);
+  
+      console.log("Vérification du token", tokenVerification)
+  
+      if (tokenVerification) {
+        next()
+      } else {
+        res.status(403).json({
+          success: false,
+        })
+      }
+    } else {
+      res.status(400).send({
+        success: false,
+        message: "Unknown secret key"
+      })
+    }
+
+
+  } catch(err: any) {
+    if (err.name === "TokenExpiredError") {
+      res.status(401).send({ message: "Token has expired" })
     }
   }
 }

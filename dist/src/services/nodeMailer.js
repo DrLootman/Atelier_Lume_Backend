@@ -35,7 +35,7 @@ const sendEmail = (req, res) => {
     });
     const mailOptions = {
         from: email,
-        to: 'nicolas_m_44@hotmail.fr',
+        to: 'latelierlume@gmail.com',
         priority: 'high',
         subject: `${name} souhaite te contacter !`,
         html: `

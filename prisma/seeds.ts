@@ -9,14 +9,6 @@ const inspirationCategory = [
   },
 ];
 
-// const personnalInfos = [
-//   {
-//     id: 1,
-//     photo_url: "./uploads/Profile_Img.jpg",
-//     profile_paragraph: `Je suis Camille, une décoratrice d'intérieur passionnée par l'aménagement et la mise en scène des espaces de vie. J'ai récemment obtenu mon diplôme en architecture intérieure et j'ai depuis travaillé avec différents clients pour créer des designs intérieurs sur mesure qui répondent à leurs besoins et reflètent leur personnalité.`,
-//   },
-// ];
-
 import { RealisationArticleI } from "../src/interfaces/interfaces";
 const inspirationImages = [
   {
@@ -31,7 +23,7 @@ const inspirationImages = [
   },
   {
     id: 3,
-    URL: "/inspirations/Modelisation_3D_5.jpg",
+    URL: "/inspirations/Modelisation_3D_6.jpg",
     label: "Inspiration slovaque",
   },
   {
@@ -81,18 +73,18 @@ const realisationArticles = [
 const creation = [
   {
     id: 1,
-    photo_url: "/realisations/christmas.jpg",
-    label: "Charme hivernal",
+    photo_url: "/realisations/prosedenuit.jpg",
+    label: "Salon cosy",
   },
   {
     id: 2,
-    photo_url: "/realisations/baptiste.jpg",
-    label: "Eveil lumineux",
+    photo_url: "/realisations/picasso.jpg",
+    label: "Home staging",
   },
   {
     id: 3,
     photo_url: "/realisations/boheme.jpg",
-    label: "Traits d'Orient",
+    label: "Agencement d'intérieur",
   },
 ];
 
@@ -108,6 +100,7 @@ async function main() {
       },
     });
 
+    //Création de la table avec les informations personnelles (photo et paragraphe)
     await prisma.personnalInformations.create({
       data: {
         id: 1,

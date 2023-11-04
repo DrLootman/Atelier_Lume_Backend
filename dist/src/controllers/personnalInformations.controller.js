@@ -26,4 +26,24 @@ exports.default = {
             }
         });
     },
+    updateParagraph(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { profile_paragraph } = req.body;
+            try {
+                const personnalInfosModel = new personnalInformations_model_1.default();
+                const allPersonnalInfos = yield personnalInfosModel.updatePersonnalParagraph({ profile_paragraph });
+                res.status(201).send({
+                    success: true,
+                    message: `The personnal paragraph has been updated successfully`,
+                });
+            }
+            catch (err) {
+                res.status(500).send({
+                    success: false,
+                    message: `Internal Server Error`,
+                });
+            }
+            return {};
+        });
+    },
 };

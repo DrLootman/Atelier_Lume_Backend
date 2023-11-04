@@ -74,18 +74,18 @@ const realisationArticles = [
 const creation = [
     {
         id: 1,
-        photo_url: "/realisations/christmas.jpg",
-        label: "Charme hivernal",
+        photo_url: "/realisations/prosedenuit.jpg",
+        label: "Salon cosy",
     },
     {
         id: 2,
-        photo_url: "/realisations/baptiste.jpg",
-        label: "Eveil lumineux",
+        photo_url: "/realisations/picasso.jpg",
+        label: "Home staging",
     },
     {
         id: 3,
         photo_url: "/realisations/boheme.jpg",
-        label: "Traits d'Orient",
+        label: "Agencement d'intérieur",
     },
 ];
 function main() {
@@ -99,6 +99,7 @@ function main() {
                     photo_category_name: "Mes projets récents",
                 },
             });
+            //Création de la table avec les informations personnelles (photo et paragraphe)
             yield prisma.personnalInformations.create({
                 data: {
                     id: 1,

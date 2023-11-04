@@ -77,3 +77,6 @@ export interface PersonnalInformationsI {
   profile_paragraph?: string;
 }
 
+export interface PersonnalParagraphI {
+  profile_paragraph: string;
+}

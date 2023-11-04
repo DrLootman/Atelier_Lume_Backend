@@ -40,7 +40,7 @@ export const sendEmail = (req: Request, res: Response) => {
 
   const mailOptions: MailOptionsI = {
     from: email,
-    to: 'nicolas_m_44@hotmail.fr',
+    to: 'latelierlume@gmail.com',
     priority: 'high',
     subject: `${name} souhaite te contacter !`,
     html: `

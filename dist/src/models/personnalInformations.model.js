@@ -19,5 +19,17 @@ class CreationModel {
             return yield this.client.personnalInformations.findMany();
         });
     }
+    updatePersonnalParagraph({ profile_paragraph }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.client.personnalInformations.update({
+                where: {
+                    id: 1,
+                },
+                data: {
+                    profile_paragraph: profile_paragraph,
+                }
+            });
+        });
+    }
 }
 exports.default = CreationModel;

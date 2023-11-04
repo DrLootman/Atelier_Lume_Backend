@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
+const personnalInformations_controller_1 = __importDefault(require("../controllers/personnalInformations.controller"));
 const admin_controller_1 = __importDefault(require("../controllers/admin.controller"));
 const auth_1 = require("../services/auth");
 // Possibilité d'importer plusieurs controller en une ligne en écrivant from "../controllers/";
@@ -13,4 +14,6 @@ router.post("/login", auth_1.isEmailExist, auth_1.isPasswordValid);
 router.get("/", admin_controller_1.default.getAllAdmin);
 router.put("/:id", admin_controller_1.default.updateAdmin);
 router.delete("/:id", admin_controller_1.default.deleteAdmin);
+// Route concernant les informations personnelles
+router.put("/personnalInfos/paragraph", personnalInformations_controller_1.default.updateParagraph);
 exports.default = router;
